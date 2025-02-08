@@ -1,3 +1,5 @@
 /.qodo/
 /.vscode/
 /tmp/
+/configs/prod.yml
+/bin/

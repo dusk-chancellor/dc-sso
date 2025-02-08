@@ -1,19 +1,21 @@
-- [ ] set up config & env vars
-- [ ] set up connections with postgres & redis + migrations + models
-- [ ] repo layer (db & cache)
-- [ ] service layer (app logic)
-- [ ] transport layer (grpc handlers)
-- [ ] jwt use logic & logs (via zap) - /pkg/
-- [ ] configure app init - /internal/app/ && /cmd/sso/main.go
-- [ ] write migrator for up & down
-- [ ] dockerize + Makefile
+- [x] set up config & env vars
+- [x] set up connections with postgres & redis + migrations + models
+- [x] write migrator for up & down
+- [x] abstractions (structs & interfaces; unimplemented methods)
+- [x] repo layer (db & cache)
+- [x] service layer (app logic)
+- [x] jwt implementation & logs (via zap) - /pkg/
+- [x] transport layer (grpc server conf & handlers)
+- [x] configure app init - /internal/app/ && /cmd/sso/main.go
+- [x] dockerize + Makefile
 - [ ] hand testing grpc api via postman
 - [ ] unit testing
 - [ ] ...
 
-Make sure to:
+Make sure to properly:
 - log
 - comment
-- make code:
+- write code, which is:
+    - independent (uses abstractions)
     - clean
     - simple
