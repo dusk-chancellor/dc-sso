@@ -8,7 +8,7 @@ import (
 
 func ToPbUser(in *models.User) *pb.User {
 	var role pb.Role
-	if in.Role == pb.Role_ADMIN.String() {
+	if in.Role == "1" {
 		role = pb.Role_ADMIN
 	} else {
 		role = pb.Role_USER

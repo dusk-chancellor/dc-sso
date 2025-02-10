@@ -14,6 +14,10 @@ RUN go mod download
 # copy source code
 COPY . .
 
+# set env
+ENV CONFIG_PATH="./configs/local.yml"
+ENV JWT_SECRET="randomencryptedhash"
+
 # build the application
 # CGO_ENABLED=0 for static binary
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /app/sso ./cmd/sso

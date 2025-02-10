@@ -1,10 +1,10 @@
 package config
 
 import (
+	"log"
 	"os"
 	"time"
 
-	"github.com/dusk-chancellor/dc-sso/pkg/zaplog"
 	"github.com/ilyakaznacheev/cleanenv"
 )
 
@@ -58,7 +58,7 @@ func LoadConfig() (*Config, error) {
 	// env var for config path
 	cfgPath, ok := os.LookupEnv("CONFIG_PATH")
 	if !ok { // if not set
-		zaplog.Log("no `CONFIG_PATH` provided")
+		log.Println("no `CONFIG_PATH` provided")
 		cfgPath = defaultPath
 	}
 

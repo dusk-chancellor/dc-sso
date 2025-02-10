@@ -18,23 +18,16 @@ import (
 // grpc server configuration
 
 type Server struct {
-	log 	   *zap.SugaredLogger
+	log 	   *zap.Logger
 	grpcServer *grpc.Server
 	port 	   int
 }
 
-func New(log *zap.SugaredLogger, service service.Service, port int) *Server {
+func New(log *zap.Logger, service service.Service, port int) *Server {
 	// log options
 	loggingOpts := []logging.Option{
 		logging.WithLogOnEvents(
 			logging.PayloadSent, logging.PayloadReceived,
-		),
-		logging.WithErrorFields(
-			func(err error) logging.Fields {
-				return logging.Fields{
-					err.Error(),
-				}
-			},
 		),
 	}
 	// recovery options
@@ -77,7 +70,7 @@ func (s *Server) Run() error {
 		return err
 	}
 
-	s.log.Info("grpc server started on", zap.String("address", l.Addr().String()))
+	s.log.Info("grpc server started on ", zap.String("address", l.Addr().String()))
 
 	if err := s.grpcServer.Serve(l); err != nil {
 		childLogger.Error("serving process error", zap.Error(err))
@@ -93,7 +86,7 @@ func (s *Server) Stop() {
 	s.grpcServer.GracefulStop()
 }
 // convert zap.Logger to logging.Logger
-func interceptorLogger(log *zap.SugaredLogger) logging.Logger {
+func interceptorLogger(log *zap.Logger) logging.Logger {
 	return logging.LoggerFunc(func(ctx context.Context, lvl logging.Level, msg string, fields ...any) {
 		f := make([]zap.Field, 0, len(fields)/2)
 
@@ -113,7 +106,7 @@ func interceptorLogger(log *zap.SugaredLogger) logging.Logger {
 			}
 		}
 
-		logger := log.WithOptions(zap.AddCallerSkip(1)).With(f)
+		logger := log.WithOptions(zap.AddCallerSkip(1)).With(f...)
 
 		switch lvl {
 		case logging.LevelDebug:

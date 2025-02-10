@@ -1,6 +1,5 @@
 - [x] set up config & env vars
 - [x] set up connections with postgres & redis + migrations + models
-- [x] write migrator for up & down
 - [x] abstractions (structs & interfaces; unimplemented methods)
 - [x] repo layer (db & cache)
 - [x] service layer (app logic)

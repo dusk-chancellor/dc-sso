@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS users (
     username VARCHAR(32) NOT NULL,
     email TEXT NOT NULL UNIQUE,
     password BYTEA NOT NULL,
-    role VARCHAR(1) DEFAULT '0' CHECK (role IN ('0', '1'))
+    role VARCHAR(1) DEFAULT '0' CHECK (role IN ('0', '1')),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

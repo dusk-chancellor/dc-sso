@@ -5,7 +5,6 @@ import (
 	"time"
 
 	"github.com/dusk-chancellor/dc-sso/internal/models"
-	"github.com/dusk-chancellor/dc-sso/pkg/zaplog"
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/google/uuid"
 )
@@ -66,7 +65,6 @@ func ParseToken(in, secret string) (*Claims, error) {
 
 	claims, ok := token.Claims.(*Claims)
 	if !token.Valid || !ok {
-		zaplog.Log("invalid token or claims")
 		return nil, ErrInvalidToken
 	}
 

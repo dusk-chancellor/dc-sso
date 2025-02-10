@@ -18,7 +18,7 @@ type App struct {
 	GRPCServer *server.Server
 }
 
-func New(ctx context.Context, log *zap.SugaredLogger, cfg *config.Config) *App {
+func New(ctx context.Context, log *zap.Logger, cfg *config.Config) *App {
 	pool, err := postgres.ConnectDB(ctx, &cfg.Db)
 	if err != nil {
 		log.DPanic("failed to connect db", zap.Error(err))

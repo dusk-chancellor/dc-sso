@@ -34,7 +34,7 @@ type Updater interface {
 }
 
 type Service struct {
-	log *zap.SugaredLogger
+	log *zap.Logger
 	db DB
 	getter Getter
 	updater Updater
@@ -42,7 +42,7 @@ type Service struct {
 }
 
 // creates new service instance
-func New(logger *zap.SugaredLogger, db DB, getter Getter, updater Updater, jwt *config.JWT) *Service {
+func New(logger *zap.Logger, db DB, getter Getter, updater Updater, jwt *config.JWT) *Service {
 	return &Service{
 		log: logger,
 		db: db,

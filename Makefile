@@ -1,11 +1,11 @@
-CONFIG_PATH = ./configs/local.yml
-JWT_SECRET = randomencryptedhash
+CONFIG_PATH="./configs/local.yml"
+JWT_SECRET="randomencryptedhash"
 
-go-run:
-	go run cmd/sso/main.go
+local-run:
+	CONFIG_PATH=${CONFIG_PATH} JWT_SECRET=${JWT_SECRET} go run cmd/sso/main.go
 
-go-build:
-	go build -o bin/sso ./cmd/sso/main.go
+local-build:
+	CONFIG_PATH=${CONFIG_PATH} JWT_SECRET=${JWT_SECRET} go build -o bin/sso ./cmd/sso/main.go
 
 sso-up:
 	docker compose up -d sso

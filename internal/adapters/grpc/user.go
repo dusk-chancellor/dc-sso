@@ -65,7 +65,14 @@ func (s *serverAPI) SetRole(ctx context.Context, in *pb.SetRoleRequest) (*pb.Set
 		return nil, status.Error(codes.InvalidArgument, "email and wanted role required")
 	}
 
-	success, err := s.service.SetRole(ctx, email, wantsRole.String())
+	var role string
+	if wantsRole == pb.Role_ADMIN {
+		role = "1"
+	} else {
+		role = "0"
+	}
+
+	success, err := s.service.SetRole(ctx, email, role)
 	if err != nil {
 		if errors.Is(err, repo.ErrUserNotFound) {
 			return nil, status.Error(codes.NotFound, "user not found")
